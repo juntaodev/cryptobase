@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Trending = () => {
   const [trending, setTrending] = useState([]);
@@ -11,6 +12,7 @@ const Trending = () => {
       setTrending(response.data.coins);
     });
   }, []);
+
   return (
     <div className="rounded-div my-12 py-8 text-primary">
       <h1 className="text-2xl font-bold py-4">Trending Coins</h1>
@@ -22,14 +24,18 @@ const Trending = () => {
           >
             <div className="flex w-full items-center justify-between">
               <div className="flex">
-                <img
-                  className="mr-4 rounded-full"
-                  src={coin.item.small}
-                  alt="/"
-                />
+                <Link to={`/coin/${coin.item.id}`}>
+                  <img
+                    className="mr-4 rounded-full"
+                    src={coin.item.small}
+                    alt={coin.item.id}
+                  />
+                </Link>
                 <div>
-                  <p className="font-bold">{coin.item.name}</p>
-                  <p>{coin.item.symbol}</p>
+                  <Link to={`/coin/${coin.item.id}`}>
+                    <p className="font-bold">{coin.item.name}</p>
+                    <p>{coin.item.symbol}</p>
+                  </Link>
                 </div>
               </div>
               <div className="flex items-center">
